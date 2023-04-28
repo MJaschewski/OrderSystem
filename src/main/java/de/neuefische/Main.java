@@ -27,13 +27,16 @@ public class Main {
             orderMap1.put(Mouse.getProductID(), Mouse);
             orderMap1.put(Keyboard.getProductID(), Keyboard);
 
-            Order newOrder = new Order("testOrder",orderMap1);
+            Order newOrder = new Order("Order1",orderMap1);
 
             newService.addOrder(newOrder);
         //Usages
             System.out.println(newService.listProducts());
             System.out.println(newService.listOrders());
 
+            Order get = newService.getOrder(newOrder.getOrderID());
+            System.out.println("Get order Id. Order Id of Order 1: " + get.getOrderID());
 
+            System.out.println("Get Product 1002 : " + newService.getProduct("1002").getName());
     }
 }
