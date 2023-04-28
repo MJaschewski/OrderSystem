@@ -12,16 +12,44 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShopServiceTest {
+
+    @Test
+    void Shop_Service_addOrder_returns_empty_Order_invalid_OrderProductList() {
+        //Given
+        Map<String, Product> productMap = new HashMap<>();
+        ProductRepo newProducts = new ProductRepo(productMap);
+
+        ShopService newService = new ShopService(newProducts);
+
+
+        Map<String, Product> orderMap = new HashMap<>();
+        Product Lappy = new Product("Laptop","1001",1500.00);
+        Product Mouse = new Product("Mouse","1002",30.00);
+        Product Keyboard = new Product("Keyboard","1003",50.00);
+        orderMap.put(Lappy.getProductID(), Lappy);
+        orderMap.put(Mouse.getProductID(), Mouse);
+        orderMap.put(Keyboard.getProductID(), Keyboard);
+
+        Order newOrder = new Order("1235",orderMap);
+
+
+        //Then
+        newService.addOrder(newOrder);
+
+
+    }
     @Test
     void ShopService_listOrders_returns_String_of_Orders(){
         //Given
         Map<String, Product> productMap = new HashMap<>();
+        Product Lappy = new Product("Laptop","1001",1500.00);
+        productMap.put(Lappy.getProductID(), Lappy);
         ProductRepo newProducts = new ProductRepo(productMap);
         ShopService newService = new ShopService(newProducts);
         Order newOrder2 = new Order("Order2",productMap);
         newService.addOrder(newOrder2);
 
-        String expected = "Order{orderID='Order2', orderPrice=0.0, orderMap={}}\n";
+        String expected = "Order{orderID='Order2', orderMap={1001=Product{name='Laptop', productID='1001', price=1500.0}}}\n";
         //When
         String actual = newService.listOrders();
         //Then
@@ -63,6 +91,8 @@ class ShopServiceTest {
     void ShopService_getOrder_returns_Order(){
         //Given
         Map<String, Product> productMap = new HashMap<>();
+        Product Lappy = new Product("Laptop","1001",1500.00);
+        productMap.put(Lappy.getProductID(), Lappy);
         ProductRepo newProducts = new ProductRepo(productMap);
         ShopService newService = new ShopService(newProducts);
 
@@ -81,6 +111,8 @@ class ShopServiceTest {
     void ShopService_addOrder_returns_Order(){
         //Given
         Map<String, Product> productMap = new HashMap<>();
+        Product Lappy = new Product("Laptop","1001",1500.00);
+        productMap.put(Lappy.getProductID(), Lappy);
         ProductRepo newProducts = new ProductRepo(productMap);
         ShopService newService = new ShopService(newProducts);
 

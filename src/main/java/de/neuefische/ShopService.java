@@ -17,6 +17,20 @@ public class ShopService {
         this.productRepo = productRepo;
     }
 
+    public boolean commitOrders(){
+        for(Order orders : orderRepo.orderList()){
+            for(Product products : orders.getOrderMap().values()){
+                try{
+                    productRepo.getProduct(products.getProductID());
+                } catch (NoSuchElementException e){
+                    System.out.println("False order. Product " + products.getName() + " ID: " + products.getProductID() + "can't be ordered");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public Product getProduct(String productID){
         try{
             return productRepo.getProduct(productID);
@@ -35,6 +49,15 @@ public class ShopService {
     }
 
     public Order addOrder(Order order){
+        for(Product products : order.getOrderMap().values()){
+                try{
+                    productRepo.getProduct(products.getProductID());
+                } catch (NoSuchElementException e){
+                    System.out.println("False order. Product " + products.getName() + " ID: " + products.getProductID() + " can't be ordered");
+                    return new Order();
+                }
+        }
+
         orderRepo.addOrder(order);
         return  orderRepo.getOrder(order.getOrderID());
     }
