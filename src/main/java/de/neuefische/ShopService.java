@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 public class ShopService {
 
     private ProductRepo productRepo;
-    private OrderRepo orderRepo;
+    private OrderRepo orderRepo = new OrderRepo();
 
     public ShopService(ProductRepo productRepo) {
         this.productRepo = productRepo;

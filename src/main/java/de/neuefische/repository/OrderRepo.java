@@ -40,7 +40,7 @@ public class OrderRepo {
         return orderMap.get(order.getOrderID());
     }
     public Order getOrder(String orderID) throws NoSuchElementException{
-        if (orderList().contains(orderID)) {
+        if (orderMap.containsKey(orderID)) {
             return orderMap.get(orderID);
         }
         else {

@@ -8,9 +8,9 @@ public class Order {
 
     private String orderID;
     private double orderPrice;
-    private Map<String,Order> orderMap;
+    private Map<String,Product> orderMap;
 
-    public Order(String orderID, double orderPrice, Map<String, Order> orderMap) {
+    public Order(String orderID, double orderPrice, Map<String, Product> orderMap) {
         this.orderID = orderID;
         this.orderPrice = orderPrice;
         this.orderMap = orderMap;
@@ -38,11 +38,11 @@ public class Order {
                 '}';
     }
 
-    public Map<String, Order> getOrderMap() {
+    public Map<String, Product> getOrderMap() {
         return orderMap;
     }
 
-    public void setOrderMap(Map<String, Order> orderMap) {
+    public void setOrderMap(Map<String, Product> orderMap) {
         this.orderMap = orderMap;
     }
 
