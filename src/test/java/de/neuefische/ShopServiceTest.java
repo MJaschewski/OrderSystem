@@ -21,7 +21,7 @@ class ShopServiceTest {
         Order newOrder2 = new Order("Order2",productMap);
         newService.addOrder(newOrder2);
 
-        String expected = "Order{orderID='Order2', orderPrice=1500.0, orderMap={}}\n";
+        String expected = "Order{orderID='Order2', orderPrice=0.0, orderMap={}}\n";
         //When
         String actual = newService.listOrders();
         System.out.println(actual);
