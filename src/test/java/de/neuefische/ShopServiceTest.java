@@ -24,7 +24,6 @@ class ShopServiceTest {
         String expected = "Order{orderID='Order2', orderPrice=0.0, orderMap={}}\n";
         //When
         String actual = newService.listOrders();
-        System.out.println(actual);
         //Then
         assertEquals(expected,actual);
 
