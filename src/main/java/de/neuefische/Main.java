@@ -1,5 +1,6 @@
 package de.neuefische;
 
+import de.neuefische.model.NoValidProductToOrderException;
 import de.neuefische.model.Order;
 import de.neuefische.model.Product;
 import de.neuefische.repository.ProductRepo;
@@ -29,7 +30,9 @@ public class Main {
 
             Order newOrder = new Order("Order1",orderMap1);
 
-            newService.addOrder(newOrder);
+            try{newService.addOrder(newOrder);} catch (NoValidProductToOrderException e){
+                    System.out.println(e.getMessage());
+            }
         //Usages
             System.out.println(newService.listProducts());
             System.out.println(newService.listOrders());

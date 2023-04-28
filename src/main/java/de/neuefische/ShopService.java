@@ -1,5 +1,6 @@
 package de.neuefische;
 
+import de.neuefische.model.NoValidProductToOrderException;
 import de.neuefische.model.Order;
 import de.neuefische.model.Product;
 import de.neuefische.repository.OrderRepo;
@@ -17,24 +18,10 @@ public class ShopService {
         this.productRepo = productRepo;
     }
 
-    public boolean commitOrders(){
-        for(Order orders : orderRepo.orderList()){
-            for(Product products : orders.getOrderMap().values()){
-                try{
-                    productRepo.getProduct(products.getProductID());
-                } catch (NoSuchElementException e){
-                    System.out.println("False order. Product " + products.getName() + " ID: " + products.getProductID() + "can't be ordered");
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public Product getProduct(String productID){
         try{
             return productRepo.getProduct(productID);
-        } catch (NoSuchElementException e){
+        } catch (NoValidProductToOrderException e){
             System.out.println("No such product in product repo");
             return new Product();
         }
@@ -48,16 +35,10 @@ public class ShopService {
         return output;
     }
 
-    public Order addOrder(Order order){
+    public Order addOrder(Order order) throws  NoValidProductToOrderException{
         for(Product products : order.getOrderMap().values()){
-                try{
-                    productRepo.getProduct(products.getProductID());
-                } catch (NoSuchElementException e){
-                    System.out.println("False order. Product " + products.getName() + " ID: " + products.getProductID() + " can't be ordered");
-                    return new Order();
-                }
+            productRepo.getProduct(products.getProductID());
         }
-
         orderRepo.addOrder(order);
         return  orderRepo.getOrder(order.getOrderID());
     }

@@ -1,5 +1,6 @@
 package de.neuefische;
 
+import de.neuefische.model.NoValidProductToOrderException;
 import de.neuefische.model.Order;
 import de.neuefische.model.Product;
 import de.neuefische.repository.ProductRepo;
@@ -34,9 +35,9 @@ class ShopServiceTest {
 
 
         //Then
-        newService.addOrder(newOrder);
-
-
+        try{newService.addOrder(newOrder);} catch (NoValidProductToOrderException e){
+            System.out.println(e.getMessage());
+        }
     }
     @Test
     void ShopService_listOrders_returns_String_of_Orders(){
@@ -47,7 +48,9 @@ class ShopServiceTest {
         ProductRepo newProducts = new ProductRepo(productMap);
         ShopService newService = new ShopService(newProducts);
         Order newOrder2 = new Order("Order2",productMap);
-        newService.addOrder(newOrder2);
+        try{newService.addOrder(newOrder2);} catch (NoValidProductToOrderException e){
+            System.out.println(e.getMessage());
+        }
 
         String expected = "Order{orderID='Order2', orderMap={1001=Product{name='Laptop', productID='1001', price=1500.0}}}\n";
         //When
@@ -97,9 +100,11 @@ class ShopServiceTest {
         ShopService newService = new ShopService(newProducts);
 
         Order newOrder = new Order("testOrder",productMap);
-        newService.addOrder(newOrder);
 
-        //When
+        try{newService.addOrder(newOrder);} catch (NoValidProductToOrderException e) {
+            System.out.println(e.getMessage());
+        }
+            //When
         Order actual = newService.getOrder(newOrder.getOrderID());
 
         //Then
@@ -119,7 +124,11 @@ class ShopServiceTest {
         Order newOrder = new Order("testOrder",productMap);
 
         //When
-        Order actual = newService.addOrder(newOrder);
+        Order actual = new Order();
+        try{actual = newService.addOrder(newOrder);
+        } catch (NoValidProductToOrderException e) {
+            System.out.println(e.getMessage());
+        }
 
         //Then
        assertEquals(newOrder,actual);

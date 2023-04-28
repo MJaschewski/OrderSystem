@@ -1,5 +1,6 @@
 package de.neuefische.repository;
 
+import de.neuefische.model.NoValidProductToOrderException;
 import de.neuefische.model.Product;
 
 import java.util.*;
@@ -19,12 +20,12 @@ public class ProductRepo {
         return productMap.get(product.getProductID());
     }
 
-    public Product getProduct(String productID) throws NoSuchElementException{
+    public Product getProduct(String productID) throws NoValidProductToOrderException{
         if(productMap.containsKey(productID)){
             return productMap.get(productID);
         }
         else {
-            throw new NoSuchElementException();
+            throw new NoValidProductToOrderException("False order. Product with ID: " + productID + " can't be ordered. Not in ProductRepository");
         }
     }
 
