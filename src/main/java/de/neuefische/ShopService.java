@@ -40,8 +40,18 @@ public class ShopService {
 
     public Order getOrder(String orderID){
         try {
-            
+            return orderRepo.getOrder(orderID);
+        } catch (NoSuchElementException e){
+            System.out.println("No such order found");
+            return new Order();
         }
     }
 
+    public String listOrders(){
+        String output = "";
+        for (Order orders : orderRepo.orderList()) {
+            output = output + orders.toString() +"\n";
+        }
+        return output;
+    }
 }

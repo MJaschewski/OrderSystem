@@ -48,7 +48,7 @@ public class OrderRepo {
         }
     }
 
-    private List<Order> orderList(){
+    public List<Order> orderList(){
         List <Order> oList = new ArrayList<>();
         for (Order orders: orderMap.values()) {
             oList.add(orders);
