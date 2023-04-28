@@ -7,13 +7,16 @@ import java.util.Objects;
 public class Order {
 
     private String orderID;
-    private double orderPrice;
+    private double orderPrice = 0;
     private Map<String,Product> orderMap;
 
-    public Order(String orderID, double orderPrice, Map<String, Product> orderMap) {
+
+    public Order(String orderID, Map<String, Product> orderMap) {
         this.orderID = orderID;
-        this.orderPrice = orderPrice;
         this.orderMap = orderMap;
+        for (Product products : this.orderMap.values()){
+            this.orderPrice += products.getPrice();
+        }
     }
 
     @Override
@@ -31,6 +34,9 @@ public class Order {
 
     @Override
     public String toString() {
+        for (Product products : this.orderMap.values()){
+            this.orderPrice += products.getPrice();
+        }
         return "Order{" +
                 "orderID='" + orderID + '\'' +
                 ", orderPrice=" + orderPrice +
@@ -59,6 +65,9 @@ public class Order {
     }
 
     public double getOrderPrice() {
+        for (Product products : this.orderMap.values()){
+            this.orderPrice += products.getPrice();
+        }
         return orderPrice;
     }
 

@@ -18,7 +18,7 @@ class ShopServiceTest {
         Map<String, Product> productMap = new HashMap<>();
         ProductRepo newProducts = new ProductRepo(productMap);
         ShopService newService = new ShopService(newProducts);
-        Order newOrder2 = new Order("Order2",1500.00,productMap);
+        Order newOrder2 = new Order("Order2",productMap);
         newService.addOrder(newOrder2);
 
         String expected = "Order{orderID='Order2', orderPrice=1500.0, orderMap={}}\n";
@@ -67,7 +67,7 @@ class ShopServiceTest {
         ProductRepo newProducts = new ProductRepo(productMap);
         ShopService newService = new ShopService(newProducts);
 
-        Order newOrder = new Order("testOrder",1500.00,productMap);
+        Order newOrder = new Order("testOrder",productMap);
         newService.addOrder(newOrder);
 
         //When
@@ -85,7 +85,7 @@ class ShopServiceTest {
         ProductRepo newProducts = new ProductRepo(productMap);
         ShopService newService = new ShopService(newProducts);
 
-        Order newOrder = new Order("testOrder",1500.00,productMap);
+        Order newOrder = new Order("testOrder",productMap);
 
         //When
         Order actual = newService.addOrder(newOrder);
