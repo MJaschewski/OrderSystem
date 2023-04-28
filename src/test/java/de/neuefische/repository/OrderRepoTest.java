@@ -14,7 +14,7 @@ class OrderRepoTest {
     void getOrder_returns_Order_when_found(){
         //Given
         OrderRepo testOrderRepo = new OrderRepo();
-        Order newOrder = new Order("1234",1000.00, new HashMap<String, Product>());
+        Order newOrder = new Order("1234", new HashMap<String, Product>());
         Order adding = testOrderRepo.addOrder(newOrder);
 
         //When
@@ -27,7 +27,7 @@ class OrderRepoTest {
     void addOrder_returns_Order(){
         //Given
         OrderRepo testOrderRepo = new OrderRepo();
-        Order newOrder = new Order("1234",1000.00, new HashMap<String, Product>());
+        Order newOrder = new Order("1234", new HashMap<String, Product>());
 
         //When
         Order actual = testOrderRepo.addOrder(newOrder);
