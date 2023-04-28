@@ -12,6 +12,71 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShopServiceTest {
+    @Test
+    void ShopService_listOrders_returns_String_of_Orders(){
+        //Given
+        Map<String, Product> productMap = new HashMap<>();
+        ProductRepo newProducts = new ProductRepo(productMap);
+        ShopService newService = new ShopService(newProducts);
+        Order newOrder2 = new Order("Order2",1500.00,productMap);
+        newService.addOrder(newOrder2);
+
+        String expected = "Order{orderID='Order2', orderPrice=1500.0, orderMap={}}\n";
+        //When
+        String actual = newService.listOrders();
+        System.out.println(actual);
+        //Then
+        assertEquals(expected,actual);
+
+    }
+
+    @Test
+    void ShopService_listOrders_returns_Empty_String_for_noOrders(){
+        //Given
+        Map<String, Product> productMap = new HashMap<>();
+        ProductRepo newProducts = new ProductRepo(productMap);
+        ShopService newService = new ShopService(newProducts);
+        //When
+        String actual = newService.listOrders();
+
+        //Then
+        assertEquals("", actual);
+
+    }
+
+    @Test
+    void ShopService_getOrder_returns_empty_Order_for_no_match(){
+        //Given
+        Map<String, Product> productMap = new HashMap<>();
+        ProductRepo newProducts = new ProductRepo(productMap);
+        ShopService newService = new ShopService(newProducts);
+
+        Order expected = new Order();
+
+        //When
+        Order actual = newService.getOrder("asdf");
+
+        //Then
+        assertEquals(expected,actual);
+
+    }
+    @Test
+    void ShopService_getOrder_returns_Order(){
+        //Given
+        Map<String, Product> productMap = new HashMap<>();
+        ProductRepo newProducts = new ProductRepo(productMap);
+        ShopService newService = new ShopService(newProducts);
+
+        Order newOrder = new Order("testOrder",1500.00,productMap);
+        newService.addOrder(newOrder);
+
+        //When
+        Order actual = newService.getOrder(newOrder.getOrderID());
+
+        //Then
+        assertEquals(newOrder,actual);
+
+    }
 
     @Test
     void ShopService_addOrder_returns_Order(){
