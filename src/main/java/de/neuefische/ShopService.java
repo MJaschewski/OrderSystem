@@ -13,7 +13,8 @@ public class ShopService {
     private ProductRepo productRepo;
     private OrderRepo orderRepo;
 
-    public ShopService() {
+    public ShopService(ProductRepo productRepo) {
+        this.productRepo = productRepo;
     }
 
     public Product getProduct(String productID){
